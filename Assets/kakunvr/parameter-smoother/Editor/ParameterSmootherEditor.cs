@@ -148,7 +148,12 @@ namespace com.kakunvr.parameter_smoother.editor
             var suffix = _smoothedSuffixProp.stringValue;
             foreach (var parameter in parameters)
             {
-                var param = parameter.Replace(suffix, "");
+                var param = parameter;
+                if (!string.IsNullOrEmpty(suffix))
+                {
+                    param = parameter.Replace(suffix, "");
+                }
+                
                 // 既に同名のがある場合はスキップ
                 if (smoother.configs.Any(x => x.parameterName == param))
                 {
