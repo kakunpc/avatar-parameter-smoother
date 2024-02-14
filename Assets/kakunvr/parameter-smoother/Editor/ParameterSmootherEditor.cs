@@ -6,6 +6,7 @@ using UnityEditorInternal;
 
 using com.kakunvr.parameter_smoother.runtime;
 using VRC.SDK3.Avatars.Components;
+using AnimatorControllerParameterType = UnityEngine.AnimatorControllerParameterType;
 
 // ReSharper disable once CheckNamespace
 namespace com.kakunvr.parameter_smoother.editor
@@ -21,7 +22,35 @@ namespace com.kakunvr.parameter_smoother.editor
         
         private bool _foldout=false;
         private float _localSmoothness = 0.1f;
-        private float _remoteSmoothness = 0.1f;
+        private float _remoteSmoothness = 0.7f;
+        
+        // パラメータ名のブラックリスト
+        // https://github.com/regzo2/OSCmooth/blob/master/Assets/OSCmooth/Editor/OSCmoothFilters.cs から引用
+        // 
+        // MIT License
+        // Copyright (c) 2022 Mitchell Taylor
+        //
+        // Permission is hereby granted, free of charge, to any person obtaining a copy
+        //     of this software and associated documentation files (the "Software"), to deal
+        // in the Software without restriction, including without limitation the rights
+        // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        // copies of the Software, and to permit persons to whom the Software is
+        // furnished to do so, subject to the following conditions:
+        //
+        // The above copyright notice and this permission notice shall be included in all
+        //     copies or substantial portions of the Software.
+        //
+        //     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        //     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        // SOFTWARE.
+        private readonly string[] _blackList =
+        {
+            "OSCm/", "IsLocal", "Smooth", "Proxy", "Proxy/", "_Float", "_Normalizer", "_FTI", "OSCm_BlendSet", "BlendSet", "Blend", "Binary/"
+        };
         
         private void OnEnable()
         {
@@ -109,7 +138,12 @@ namespace com.kakunvr.parameter_smoother.editor
             var path = AssetDatabase.GetAssetPath(controller);
             var animator = AssetDatabase.LoadAssetAtPath<UnityEditor.Animations.AnimatorController>(path);
 
-            var parameters = animator.parameters.Select(x => x.name).ToList();
+            var parameters = animator.parameters
+                .Where(x => x.type == AnimatorControllerParameterType.Float)
+                .Select(x => x.name)
+                .Where(x => _blackList.Any(x.Contains))
+                .ToList();
+            
             var newConfigs = new List<SmoothingConfig>();
             var suffix = _smoothedSuffixProp.stringValue;
             foreach (var parameter in parameters)
