@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.kakunvr.parameter-smoother": {
-      "version": "file:com.kakunvr.parameter-smoother",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.unity.burst": {
       "version": "1.4.11",
       "depth": 1,

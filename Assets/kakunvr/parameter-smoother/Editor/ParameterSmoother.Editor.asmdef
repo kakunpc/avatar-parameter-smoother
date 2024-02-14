@@ -1,7 +1,7 @@
 {
-    "name": "VRChatPackageTemplate.Editor",
+    "name": "kakunvr.ParameterSmoother.Editor",
     "references": [
-        "ParameterSmoother.Runtime",
+        "kakunvr.ParameterSmoother.Runtime",
         "nadena.dev.ndmf",
         "nadena.dev.modular-avatar.core"
     ],
