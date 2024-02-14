@@ -2,10 +2,10 @@
 using UnityEditor;
 using UnityEditorInternal;
 
-using dev.logilabo.parameter_smoother.runtime;
+using com.kakunvr.parameter_smoother.runtime;
 
 // ReSharper disable once CheckNamespace
-namespace dev.logilabo.parameter_smoother.editor
+namespace com.kakunvr.parameter_smoother.editor
 {
     [CustomEditor(typeof(ParameterSmoother))]
     public class SettingsEditor : Editor

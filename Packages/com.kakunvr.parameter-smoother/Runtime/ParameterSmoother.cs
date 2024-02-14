@@ -5,7 +5,7 @@ using VRC.SDK3.Avatars.Components;
 using VRC.SDKBase;
 
 // ReSharper disable once CheckNamespace
-namespace dev.logilabo.parameter_smoother.runtime
+namespace com.kakunvr.parameter_smoother.runtime
 {
     [Serializable]
     public struct SmoothingConfig

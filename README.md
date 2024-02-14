@@ -3,8 +3,8 @@
 Non-destructive Parameter Smoothing for Avatars 3.0
 
 ## How to use
-- Install [Logilabo Avatar Tools VPM repository](https://vpm.logilabo.dev) and import "Parameter Smoother".
-- Add "Logilabo Avatar Tools / Parameter Smoother" component to an object in the target avatar.
+- Install [かーばんくるのvpm](https://kakunpc.github.io/kakunpc_vpm/) and import "Parameter Smoother kakunvr fork".
+- Add "Parameter Smoother" component to an object in the target avatar.
 - Fill configuration parameters.
 
 ### Example
@@ -21,4 +21,9 @@ With this configuration, you can use the parameter `Foo/Smoothed` as smoothed `F
 ## References
 - [Advanced Blend Tree Techniques](https://notes.sleightly.dev/advanced-blendtrees/)
 - [NDM Framework](https://ndmf.nadena.dev/)
+
+## 謝辞
+
+このプロジェクトは、[logicmachine/avatar-parameter-smoother](https://github.com/logicmachine/avatar-parameter-smoother) をForkしたプロジェクトです。
+プロジェクトを公開してくださった[logicmachine](https://github.com/logicmachine/)さんに感謝いたします。
 

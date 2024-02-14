@@ -3,13 +3,13 @@ using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-using dev.logilabo.parameter_smoother.runtime;
+using com.kakunvr.parameter_smoother.runtime;
 using nadena.dev.modular_avatar.core;
 using nadena.dev.ndmf;
 using UnityEditor.Animations;
 
 // ReSharper disable once CheckNamespace
-namespace dev.logilabo.parameter_smoother.editor
+namespace com.kakunvr.parameter_smoother.editor
 {
     public class ParameterSmootherPass : Pass<ParameterSmootherPass>
     {
