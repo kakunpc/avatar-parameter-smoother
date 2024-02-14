@@ -141,7 +141,7 @@ namespace com.kakunvr.parameter_smoother.editor
             var parameters = animator.parameters
                 .Where(x => x.type == AnimatorControllerParameterType.Float)
                 .Select(x => x.name)
-                .Where(x => _blackList.Any(x.Contains))
+                .Where(x => !_blackList.Any(x.Contains))
                 .ToList();
             
             var newConfigs = new List<SmoothingConfig>();
