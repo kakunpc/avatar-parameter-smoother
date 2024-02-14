@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.kakunvr.parameter-smoother": {
+      "version": "file:com.kakunvr.parameter-smoother",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.burst": {
       "version": "1.4.11",
       "depth": 1,
@@ -141,12 +147,6 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.0.2"
       }
-    },
-    "dev.logilabo.parameter-smoother": {
-      "version": "file:dev.logilabo.parameter-smoother",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
     },
     "nadena.dev.modular-avatar": {
       "version": "file:nadena.dev.modular-avatar",
