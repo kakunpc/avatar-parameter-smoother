@@ -1,0 +1,57 @@
+name: ReleaseBuild
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  activation:
+    name: ReleaseBuild
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set output
+        id: vars
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+
+      # package.jsonのバージョン値を書き換える
+      - name: Change Version
+        env:
+          VERSION: ${{ steps.vars.outputs.tag }}
+        run: |
+          sed -i -e "s/\"version\": \".*\"/\"version\": \"$VERSION\"/g" Assets/kakunvr/parameter-smoother/package.json
+          # sed -i -e "s/CurrentVersion: .*/CurrentVersion: $VERSION/g" Assets/kakunvr/parameter-smoother/VersionData.asset
+          mkdir output
+
+      - name: CreatePackage
+        run: ./.github/UnityPacker.exe Assets/kakunvr/parameter-smoother ExportedPackage
+
+      # Booth配布用のzipを作成する
+      - name: Create Booth Package
+        env:
+          VERSION: ${{ steps.vars.outputs.tag }}
+        run: |
+          # mv Docs/ parameter-smoother-$VERSION/
+          # cp LICENCE parameter-smoother-$VERSION/
+          # cp ExportedPackage.unitypackage parameter-smoother-$VERSION/parameter-smoother-$VERSION.unitypackage
+          # zip parameter-smoother-$VERSION.zip parameter-smoother-$VERSION/*
+          # mv parameter-smoother-$VERSION.zip output/parameter-smoother-$VERSION-booth.zip
+          # mv parameter-smoother-$VERSION/parameter-smoother-$VERSION.unitypackage output/parameter-smoother-$VERSION.unitypackage
+          cp ExportedPackage.unitypackage output/parameter-smoother-$VERSION.unitypackage
+
+      # VCC用のzipを作成する
+      - name: Create VCC Package
+        env:
+          VERSION: ${{ steps.vars.outputs.tag }}
+        run: |
+          cd Assets/kakunvr/parameter-smoother
+          zip -r ../../../output/com.kakunvr.parameter-smoother-$VERSION.zip *
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          files: |
+            output/*
