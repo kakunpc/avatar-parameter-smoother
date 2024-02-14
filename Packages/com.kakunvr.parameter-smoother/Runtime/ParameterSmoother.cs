@@ -15,7 +15,7 @@ namespace com.kakunvr.parameter_smoother.runtime
         public float remoteSmoothness;
     }
 
-    [AddComponentMenu("Logilabo Avatar Tools/Parameter Smoother")]
+    [AddComponentMenu("Parameter Smoother")]
     public class ParameterSmoother : MonoBehaviour, IEditorOnly
     {
         public VRCAvatarDescriptor.AnimLayerType layerType = VRCAvatarDescriptor.AnimLayerType.FX;
